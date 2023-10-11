@@ -13,6 +13,7 @@ import ptBr from '@angular/common/locales/pt';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgZorroAntdModule } from './ng-zorro-antd.module';
 
 registerLocaleData(ptBr);
 
@@ -30,6 +31,7 @@ registerLocaleData(ptBr);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgZorroAntdModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: pt_BR }
