@@ -15,7 +15,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgZorroAntdModule } from './ng-zorro-antd.module';
 
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import { IconDefinition } from '@ant-design/icons-angular';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 registerLocaleData(ptBr);
+
+const antDesignIcons = AllIcons as {
+  [key: string]: IconDefinition;
+};
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
+
 
 @NgModule({
   declarations: [
@@ -31,10 +42,12 @@ registerLocaleData(ptBr);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    NzIconModule
   ],
   providers: [
-    { provide: NZ_I18N, useValue: pt_BR }
+    { provide: NZ_I18N, useValue: pt_BR },
+    { provide: NZ_ICONS, useValue: icons }
   ],
   bootstrap: [AppComponent]
 })
