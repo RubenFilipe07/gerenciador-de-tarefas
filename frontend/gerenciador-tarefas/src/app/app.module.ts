@@ -18,7 +18,7 @@ import { TarefasComponent } from './pages/tarefas/tarefas.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
