@@ -1,10 +1,19 @@
 import { NgModule } from '@angular/core';
 
-import { NzButtonModule } from 'ng-zorro-antd/button';
+import { BrowserModule } from '@angular/platform-browser';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb'
+
+
 
 @NgModule({
     exports: [
-        NzButtonModule,
+        BrowserModule,
+        NzLayoutModule,
+        NzMenuModule,
+        NzBreadCrumbModule,
+        
     ]
     })
 
