@@ -19,6 +19,8 @@ import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { MenuComponent } from './components/menu/menu.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 registerLocaleData(ptBr);
 
@@ -34,7 +36,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     PrincipalComponent,
     LoginComponent,
     CadastroComponent,
-    TarefasComponent
+    TarefasComponent,
+    MenuComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

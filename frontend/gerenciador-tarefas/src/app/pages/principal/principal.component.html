@@ -1,28 +1,5 @@
 <nz-layout>
-    <nz-header class="header">
-        <div class="logo">
-            <img src="/assets/logo.png" alt="image">
-            <h1>SIG<span class="thin">TAREFAS</span></h1>
-        </div>
-
-        <div class="menu">
-            <ul nz-menu nzTheme="dark" nzMode="horizontal">
-                <li nz-menu-item nzIcon="home" nzSelected>
-                    <span nz-icon nzType="home" nzTheme="outline"></span>
-                    Inicio
-                </li>
-                <li nz-menu-item>
-                    <span nz-icon nzType="login" nzTheme="outline"></span>
-                    Login
-                </li>
-                <li nz-menu-item>
-                    <span nz-icon nzType="user-add" nzTheme="outline"></span>
-                    Cadastro
-                </li>
-            </ul>
-        </div>
-
-    </nz-header>
+    <menu-component></menu-component>
 
     <nz-content>
         <div class="conteudo">
@@ -30,20 +7,5 @@
         </div>
     </nz-content>
 
-    <nz-footer class="footer">
-
-        <div class="footer-logo">
-            <img src="/assets/esig-group.png" alt="Esig Group">
-        </div>
-
-        <div class="footer-info">
-            <p>&copy; 2023 Esig Group</p>
-            <p>Todos os direitos reservados</p>
-        </div>
-
-        <div class="footer-contact">
-            <p>Email: contato@esig.com.br</p>
-            <p>Telefone: (84) 3034-9310</p>
-        </div>
-    </nz-footer>
+    <footer-component></footer-component>
 </nz-layout>
