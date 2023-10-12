@@ -1,0 +1,31 @@
+ <nz-header class="header">
+        <div class="logo">
+            <img src="/assets/logo.png" alt="image">
+            <h1>SIG<span class="thin">TAREFAS</span></h1>
+        </div>
+
+      
+        <div class="menu">
+            <ul nz-menu nzTheme="dark" nzMode="horizontal">
+                <li nz-menu-item>
+                    <a [routerLink]="['/']">
+                        <span nz-icon nzType="home" nzTheme="outline"></span>
+                        Inicio
+                    </a>
+                </li>
+                <li nz-menu-item>
+                    <a [routerLink]="['/login']">
+                        <span nz-icon nzType="login" nzTheme="outline"></span>
+                        Login
+                    </a>
+                </li>
+                <li nz-menu-item>
+                    <a [routerLink]="['/cadastro']">
+                        <span nz-icon nzType="user-add" nzTheme="outline"></span>
+                        Cadastro
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </nz-header>
