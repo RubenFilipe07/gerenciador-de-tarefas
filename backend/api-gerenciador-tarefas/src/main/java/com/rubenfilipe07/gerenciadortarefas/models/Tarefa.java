@@ -1,7 +1,9 @@
 package com.rubenfilipe07.gerenciadortarefas.models;
-
+import com.rubenfilipe07.gerenciadortarefas.enums.PrioridadeTarefa;
+import com.rubenfilipe07.gerenciadortarefas.enums.SituacaoTarefa;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -89,32 +91,23 @@ public class Tarefa implements Serializable {
 		this.responsavel = responsavel;
 	}
 
-}
-
-enum SituacaoTarefa {
-	EM_ANDAMENTO(1), CONCLUIDA(2);
-
-	private final int codigo;
-
-	private SituacaoTarefa(int codigo) {
-		this.codigo = codigo;
+	@Override
+	public int hashCode() {
+		return Objects.hash(deadline, descricao, id, prioridade, responsavel, situacao, titulo);
 	}
 
-	private int getCodigo() {
-		return codigo;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tarefa other = (Tarefa) obj;
+		return Objects.equals(deadline, other.deadline) && Objects.equals(descricao, other.descricao) && id == other.id
+				&& prioridade == other.prioridade && Objects.equals(responsavel, other.responsavel)
+				&& situacao == other.situacao && Objects.equals(titulo, other.titulo);
 	}
 
-	public static SituacaoTarefa valueOf(int codigo) {
-		for (SituacaoTarefa s : SituacaoTarefa.values()) {
-			if (s.getCodigo() == codigo) {
-				return s;
-			}
-		}
-		throw new IllegalArgumentException("Código inválido");
-	}
-
-}
-
-enum PrioridadeTarefa {
-	ALTA, MEDIA, BAIXA,
 }
