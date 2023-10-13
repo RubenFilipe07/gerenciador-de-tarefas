@@ -32,6 +32,11 @@ public class TarefaController {
     public ResponseEntity<Object> updateTarefa(@PathVariable long id, @RequestBody Tarefa tarefaModel) {
         return tarefaService.updateTarefa(id, tarefaModel);  
     }
+    
+    @PutMapping("/{id}/concluida")
+    public ResponseEntity<Object> updateTarefaConcluida(@PathVariable long id) {
+        return tarefaService.updateTarefaConcluida(id);  
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteOneTarefa(@PathVariable long id) {
