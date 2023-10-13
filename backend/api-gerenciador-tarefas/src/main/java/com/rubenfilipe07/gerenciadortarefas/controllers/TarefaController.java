@@ -24,7 +24,7 @@ public class TarefaController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-	@GetMapping("/tarefa/{id}")
+	@GetMapping("/tarefas/{id}")
 	public ResponseEntity<Object> getOneTarefa(@PathVariable long id) {
 
 		if (tarefaRepository.findById(id).isEmpty()) {
@@ -37,16 +37,20 @@ public class TarefaController {
 	}
 
 	@GetMapping("/tarefas")
-	public ResponseEntity<Object> getAllTarefasByUsuario2(@RequestParam(name = "usuario") Long id) {
-		Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
+	public ResponseEntity<Object> getAllTarefasByUsuario(@RequestParam(name = "usuario", required = false) Long id) {
+	    if (id != null) {
+	        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
 
-		if (usuarioOptional.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
-		}
+	        if (usuarioOptional.isEmpty()) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+	        }
 
-		List<Tarefa> tarefasDoUsuario = tarefaRepository.findByResponsavel(usuarioOptional.get());
-
-		return ResponseEntity.status(HttpStatus.OK).body(tarefasDoUsuario);
+	        List<Tarefa> tarefasDoUsuario = tarefaRepository.findByResponsavel(usuarioOptional.get());
+	        return ResponseEntity.status(HttpStatus.OK).body(tarefasDoUsuario);
+	    } else {
+	        List<Tarefa> todasAsTarefas = tarefaRepository.findAll();
+	        return ResponseEntity.status(HttpStatus.OK).body(todasAsTarefas);
+	    }
 	}
 
 	@PostMapping("/tarefas")
@@ -55,7 +59,7 @@ public class TarefaController {
 
 	}
 
-	@PutMapping("/tarefa/{id}")
+	@PutMapping("/tarefas/{id}")
 	public ResponseEntity<Object> updateTarefa(@PathVariable long id, @RequestBody Tarefa tarefaModel) {
 
 		if (tarefaRepository.findById(id).isEmpty()) {
@@ -67,7 +71,7 @@ public class TarefaController {
 
 	}
 
-	@DeleteMapping("/tarefa/{id}")
+	@DeleteMapping("/tarefas/{id}")
 	public ResponseEntity<Object> deleteOneTarefa(@PathVariable long id) {
 
 		if (tarefaRepository.findById(id).isEmpty()) {
