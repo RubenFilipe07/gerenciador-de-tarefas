@@ -1,23 +1,18 @@
 package com.rubenfilipe07.gerenciadortarefas.controllers;
 
-import java.util.List;
-
-import org.springframework.beans.BeanUtils;
+import com.rubenfilipe07.gerenciadortarefas.models.Tarefa;
+import com.rubenfilipe07.gerenciadortarefas.repositories.TarefaRepository;
+import com.rubenfilipe07.gerenciadortarefas.models.Usuario;
+import com.rubenfilipe07.gerenciadortarefas.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.rubenfilipe07.gerenciadortarefas.models.Tarefa;
-import com.rubenfilipe07.gerenciadortarefas.repositories.TarefaRepository;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -26,9 +21,12 @@ public class TarefaController {
 	@Autowired
 	TarefaRepository tarefaRepository;
 
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+
 	@GetMapping("/tarefa/{id}")
 	public ResponseEntity<Object> getOneTarefa(@PathVariable long id) {
-	
+
 		if (tarefaRepository.findById(id).isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada");
 		}
@@ -39,48 +37,47 @@ public class TarefaController {
 	}
 
 	@GetMapping("/tarefas")
-	public ResponseEntity<List<Tarefa>> getAllTarefas() {
-		return ResponseEntity.status(HttpStatus.OK).body(tarefaRepository.findAll());
+	public ResponseEntity<Object> getAllTarefasByUsuario2(@RequestParam(name = "usuario") Long id) {
+		Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
+
+		if (usuarioOptional.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+		}
+
+		List<Tarefa> tarefasDoUsuario = tarefaRepository.findByResponsavel(usuarioOptional.get());
+
+		return ResponseEntity.status(HttpStatus.OK).body(tarefasDoUsuario);
 	}
 
 	@PostMapping("/tarefas")
 	public ResponseEntity<Tarefa> saveTarefa(@RequestBody Tarefa tarefaModel) {
-		
-		BeanUtils.copyProperties(tarefaModel, tarefaModel);
 		return ResponseEntity.status(HttpStatus.CREATED).body(tarefaRepository.save(tarefaModel));
 
 	}
-	
+
 	@PutMapping("/tarefa/{id}")
-	public ResponseEntity<Object> updateTarefa(@PathVariable long id, 
-										@RequestBody Tarefa tarefaModel ) {
-		
+	public ResponseEntity<Object> updateTarefa(@PathVariable long id, @RequestBody Tarefa tarefaModel) {
+
 		if (tarefaRepository.findById(id).isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada");
-		}
-		else {
-			
-			BeanUtils.copyProperties(tarefaModel, tarefaModel);
+		} else {
 			return ResponseEntity.status(HttpStatus.CREATED).body(tarefaRepository.save(tarefaModel));
-			
+
 		}
-	
+
 	}
-	
+
 	@DeleteMapping("/tarefa/{id}")
 	public ResponseEntity<Object> deleteOneTarefa(@PathVariable long id) {
-		
+
 		if (tarefaRepository.findById(id).isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada");
-		}
-		else {
+		} else {
 			tarefaRepository.deleteById(id);
 			return ResponseEntity.status(HttpStatus.OK).body("Tarefa deletada com sucesso");
-			
+
 		}
-	
+
 	}
-	
-	
 
 }

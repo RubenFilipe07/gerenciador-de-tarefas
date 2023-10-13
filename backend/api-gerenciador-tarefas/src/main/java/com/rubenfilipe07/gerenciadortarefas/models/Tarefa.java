@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,15 +20,18 @@ public class Tarefa implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private long id;
 	private String titulo;
 	@Column(columnDefinition = "TEXT")
 	private String descricao;
-	private String responsavel;
+
+	@ManyToOne
+	@JoinColumn(name = "responsavel_id")
+	private Usuario responsavel;
+
 	private PrioridadeTarefa prioridade;
 	private LocalDate deadline;
-	private SituacaoTarefa  situacao;
+	private SituacaoTarefa situacao;
 
 	public long getId() {
 		return id;
@@ -76,23 +81,40 @@ public class Tarefa implements Serializable {
 		this.situacao = situacao;
 	}
 
-	public String getResponsavel() {
+	public Usuario getResponsavel() {
 		return responsavel;
 	}
 
-	public void setResponsavel(String responsavel) {
+	public void setResponsavel(Usuario responsavel) {
 		this.responsavel = responsavel;
 	}
 
 }
 
 enum SituacaoTarefa {
-    EM_ANDAMENTO, 
-    CONCLUIDA,    
+	EM_ANDAMENTO(1), CONCLUIDA(2);
+
+	private final int codigo;
+
+	private SituacaoTarefa(int codigo) {
+		this.codigo = codigo;
+	}
+
+	private int getCodigo() {
+		return codigo;
+	}
+
+	public static SituacaoTarefa valueOf(int codigo) {
+		for (SituacaoTarefa s : SituacaoTarefa.values()) {
+			if (s.getCodigo() == codigo) {
+				return s;
+			}
+		}
+		throw new IllegalArgumentException("Código inválido");
+	}
+
 }
 
 enum PrioridadeTarefa {
-    ALTA,   
-    MEDIA,  
-    BAIXA,  
+	ALTA, MEDIA, BAIXA,
 }
