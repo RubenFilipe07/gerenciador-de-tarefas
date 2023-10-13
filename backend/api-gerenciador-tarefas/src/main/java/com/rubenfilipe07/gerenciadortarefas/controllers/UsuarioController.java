@@ -24,7 +24,7 @@ public class UsuarioController {
 	@Autowired
 	UsuarioRepository usuarioRepository;
 
-	@GetMapping("/usuario/{id}")
+	@GetMapping("/usuarios/{id}")
 	public ResponseEntity<Object> getOneUsuario(@PathVariable long id) {
 
 		if (usuarioRepository.findById(id).isEmpty()) {
@@ -46,7 +46,7 @@ public class UsuarioController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRepository.save(usuario));
 	}
 
-	@PutMapping("/usuario/{id}")
+	@PutMapping("/usuarios/{id}")
 	public ResponseEntity<Object> updateUsuario(@PathVariable long id, @RequestBody Usuario usuario) {
 
 		if (usuarioRepository.findById(id).isEmpty()) {
@@ -58,7 +58,7 @@ public class UsuarioController {
 
 	}
 
-	@DeleteMapping("/usuario/{id}")
+	@DeleteMapping("/usuarios/{id}")
 	public ResponseEntity<Object> deleteOneUsuario(@PathVariable long id) {
 
 		if (usuarioRepository.findById(id).isEmpty()) {
