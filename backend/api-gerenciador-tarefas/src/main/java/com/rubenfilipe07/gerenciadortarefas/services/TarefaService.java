@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.rubenfilipe07.gerenciadortarefas.enums.SituacaoTarefa;
 import com.rubenfilipe07.gerenciadortarefas.models.Tarefa;
 import com.rubenfilipe07.gerenciadortarefas.models.Usuario;
 import com.rubenfilipe07.gerenciadortarefas.repositories.TarefaRepository;
@@ -24,7 +25,7 @@ public class TarefaService {
 
 	public ResponseEntity<Object> getOneTarefa(long id) {
 		if (tarefaRepository.findById(id).isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\":\"Tarefa não encontrada\"}");
 		} else {
 			return ResponseEntity.status(HttpStatus.OK).body(tarefaRepository.findById(id));
 		}
@@ -35,7 +36,7 @@ public class TarefaService {
 			Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
 
 			if (usuarioOptional.isEmpty()) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\":\"Usuario nao encontrado\"}");
 			}
 
 			List<Tarefa> tarefasDoUsuario = tarefaRepository.findByResponsavel(usuarioOptional.get());
@@ -52,18 +53,31 @@ public class TarefaService {
 
 	public ResponseEntity<Object> updateTarefa(long id, Tarefa tarefaModel) {
 		if (tarefaRepository.findById(id).isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\":\"Tarefa não encontrada\"}");
 		} else {
 			return ResponseEntity.status(HttpStatus.CREATED).body(tarefaRepository.save(tarefaModel));
 		}
 	}
+	
+	public ResponseEntity<Object> updateTarefaConcluida(long id) {
+	    Optional<Tarefa> tarefaOptional = tarefaRepository.findById(id);
+
+	    if (tarefaOptional.isEmpty()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\":\"Tarefa não encontrada\"}");
+	    } else {
+	        Tarefa tarefa = tarefaOptional.get();
+	        tarefa.setSituacao(SituacaoTarefa.CONCLUIDA);
+	        tarefaRepository.save(tarefa);
+	        return ResponseEntity.status(HttpStatus.CREATED).body("{\"message\":\"Tarefa marcada como concluida\"}");
+	    }
+	}
 
 	public ResponseEntity<Object> deleteOneTarefa(long id) {
 		if (tarefaRepository.findById(id).isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\":\"Tarefa não encontrada\"}");
 		} else {
 			tarefaRepository.deleteById(id);
-			return ResponseEntity.status(HttpStatus.OK).body("Tarefa deletada com sucesso");
+			return ResponseEntity.status(HttpStatus.OK).body("{\"message\":\"Tarefa deletada com sucesso\"}");
 		}
 	}
 }

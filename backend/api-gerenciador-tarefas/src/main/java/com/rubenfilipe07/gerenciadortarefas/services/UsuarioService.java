@@ -17,7 +17,7 @@ public class UsuarioService {
 
     public ResponseEntity<Object> getOneUsuario(long id) {
         if (usuarioRepository.findById(id).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\":\"Usuario nao encontrado\"}");
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(usuarioRepository.findById(id));
         }
@@ -33,7 +33,7 @@ public class UsuarioService {
 
     public ResponseEntity<Object> updateUsuario(long id, Usuario usuario) {
         if (usuarioRepository.findById(id).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\":\"Usuario nao encontrado\"}");
         } else {
             return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRepository.save(usuario));
         }
@@ -41,10 +41,10 @@ public class UsuarioService {
 
     public ResponseEntity<Object> deleteOneUsuario(long id) {
         if (usuarioRepository.findById(id).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\":\"Usuario nao encontrado\"}");
         } else {
             usuarioRepository.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Usuario deletado com sucesso");
+            return ResponseEntity.status(HttpStatus.OK).body("{\"message\":\"Usuario deletado com sucesso\"}");
         }
     }
 }

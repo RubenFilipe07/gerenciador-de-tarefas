@@ -12,31 +12,31 @@ import java.util.List;
 @RequestMapping(value = "/api/usuarios")
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioService usuarioService;  // Inject the UsuarioService
+	@Autowired
+	private UsuarioService usuarioService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneUsuario(@PathVariable long id) {
-        return usuarioService.getOneUsuario(id);
-    }
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> getOneUsuario(@PathVariable long id) {
+		return usuarioService.getOneUsuario(id);
+	}
 
-    @GetMapping
-    public ResponseEntity<List<Usuario>> getAllUsuarios() {
-        return usuarioService.getAllUsuarios();
-    }
+	@GetMapping
+	public ResponseEntity<List<Usuario>> getAllUsuarios() {
+		return usuarioService.getAllUsuarios();
+	}
 
-    @PostMapping
-    public ResponseEntity<Usuario> saveUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.saveUsuario(usuario);
-    }
+	@PostMapping
+	public ResponseEntity<Usuario> saveUsuario(@RequestBody Usuario usuario) {
+		return usuarioService.saveUsuario(usuario);
+	}
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateUsuario(@PathVariable long id, @RequestBody Usuario usuario) {
-        return usuarioService.updateUsuario(id, usuario);
-    }
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateUsuario(@PathVariable long id, @RequestBody Usuario usuario) {
+		return usuarioService.updateUsuario(id, usuario);
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteOneUsuario(@PathVariable long id) {
-        return usuarioService.deleteOneUsuario(id);
-    }
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> deleteOneUsuario(@PathVariable long id) {
+		return usuarioService.deleteOneUsuario(id);
+	}
 }
