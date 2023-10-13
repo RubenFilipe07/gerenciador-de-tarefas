@@ -20,12 +20,12 @@ public class UsuarioController {
         return usuarioService.getOneUsuario(id);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<Usuario>> getAllUsuarios() {
         return usuarioService.getAllUsuarios();
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Usuario> saveUsuario(@RequestBody Usuario usuario) {
         return usuarioService.saveUsuario(usuario);
     }

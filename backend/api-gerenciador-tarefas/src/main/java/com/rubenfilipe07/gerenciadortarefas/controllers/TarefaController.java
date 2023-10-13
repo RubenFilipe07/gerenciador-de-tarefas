@@ -18,12 +18,12 @@ public class TarefaController {
         return tarefaService.getOneTarefa(id);  
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<Object> getAllTarefasByUsuario(@RequestParam(name = "usuario", required = false) Long id) {
         return tarefaService.getAllTarefasByUsuario(id);  
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Tarefa> saveTarefa(@RequestBody Tarefa tarefaModel) {
         return tarefaService.saveTarefa(tarefaModel);  
     }
