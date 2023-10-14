@@ -46,6 +46,10 @@ public class TarefaService {
 			return ResponseEntity.status(HttpStatus.OK).body(todasAsTarefas);
 		}
 	}
+	
+	  public List<Tarefa> getAllTarefasByFiltro(Long id, String titulo, String descricao, Usuario responsavel, SituacaoTarefa situacao) {
+	        return tarefaRepository.getAllTarefasByFiltro(id, titulo, descricao, responsavel, situacao);
+	    }
 
 	public ResponseEntity<Tarefa> saveTarefa(Tarefa tarefaModel) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(tarefaRepository.save(tarefaModel));
