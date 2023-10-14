@@ -20,6 +20,7 @@ public class Usuario implements Serializable {
 	private Long id;
 	private String nome;
 	private String senha;
+	private String email;
 
 	@Override
 	public int hashCode() {
@@ -75,6 +76,6 @@ public class Usuario implements Serializable {
 		return serialVersionUID;
 	}
 
-	private String email;
+	
 
 }
