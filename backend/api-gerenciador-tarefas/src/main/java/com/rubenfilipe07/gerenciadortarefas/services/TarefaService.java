@@ -56,11 +56,25 @@ public class TarefaService {
 	}
 
 	public ResponseEntity<Object> updateTarefa(long id, Tarefa tarefaModel) {
-		if (tarefaRepository.findById(id).isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\":\"Tarefa não encontrada\"}");
-		} else {
-			return ResponseEntity.status(HttpStatus.CREATED).body(tarefaRepository.save(tarefaModel));
-		}
+		
+		 Optional<Tarefa> tarefaSelecionada = tarefaRepository.findById(id);
+
+	        if (tarefaSelecionada.isPresent()) {
+	            Tarefa tarefa = tarefaSelecionada.get();
+	            
+	            tarefa.setTitulo(tarefaModel.getTitulo());
+	            tarefa.setDescricao(tarefaModel.getDescricao());
+	            tarefa.setPrioridade(tarefaModel.getPrioridade());
+	            tarefa.setResponsavel(tarefaModel.getResponsavel());
+	            tarefa.setDeadline(tarefaModel.getDeadline());
+	            tarefa.setSituacao(tarefaModel.getSituacao());
+	             
+	            Tarefa updatedTarefa = tarefaRepository.save(tarefa);
+
+	            return ResponseEntity.ok(updatedTarefa); 
+	        } else {
+	        	return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\":\"Tarefa não encontrada\"}");
+	        }
 	}
 	
 	public ResponseEntity<Object> updateTarefaConcluida(long id) {
