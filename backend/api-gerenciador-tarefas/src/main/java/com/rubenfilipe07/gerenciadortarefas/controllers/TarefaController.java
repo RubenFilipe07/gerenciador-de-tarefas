@@ -5,6 +5,9 @@ import com.rubenfilipe07.gerenciadortarefas.models.Tarefa;
 import com.rubenfilipe07.gerenciadortarefas.models.Usuario;
 import com.rubenfilipe07.gerenciadortarefas.services.TarefaService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/tarefas")
+@RequestMapping(value = "/api/tarefas", produces = {"application/json"})
+@Tag(name = "tarefas")
 public class TarefaController {
 
 	@Autowired
@@ -23,11 +27,14 @@ public class TarefaController {
 		return tarefaService.getOneTarefa(id);
 	}
 
+	@Operation(summary = "Obtém uma tarefa por ID", method = "GET")
 	@GetMapping
 	public ResponseEntity<Object> getAllTarefasByUsuario(@RequestParam(name = "usuario", required = false) Long id) {
 		return tarefaService.getAllTarefasByUsuario(id);
 	}
 
+
+	@Operation(summary = "Obtém tarefas com base em critérios de filtro", method = "GET")
 	  @GetMapping("/filtro")
 	    public ResponseEntity<Object> getAllTarefasByFiltro(
 	            @RequestParam(name = "id", required = false) Long id,
@@ -39,21 +46,25 @@ public class TarefaController {
 	        return ResponseEntity.ok(tarefas);
 	    }
 	  
+	@Operation(summary = "Cria uma nova tarefa", method = "POST")
 	@PostMapping
 	public ResponseEntity<Tarefa> saveTarefa(@RequestBody Tarefa tarefaModel) {
 		return tarefaService.saveTarefa(tarefaModel);
 	}
 
+	@Operation(summary = "Atualiza uma tarefa existente com base no ID", method = "PUT")
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateTarefa(@PathVariable long id, @RequestBody Tarefa tarefaModel) {
 		return tarefaService.updateTarefa(id, tarefaModel);
 	}
 
+	@Operation(summary = "Marca uma tarefa como concluída com base no ID", method = "PUT")
 	@PutMapping("/{id}/concluida")
 	public ResponseEntity<Object> updateTarefaConcluida(@PathVariable long id) {
 		return tarefaService.updateTarefaConcluida(id);
 	}
 
+	@Operation(summary = "Exclui uma tarefa por ID", method = "DELETE")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteOneTarefa(@PathVariable long id) {
 		return tarefaService.deleteOneTarefa(id);
