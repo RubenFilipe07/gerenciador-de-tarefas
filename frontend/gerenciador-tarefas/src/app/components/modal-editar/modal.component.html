@@ -1,0 +1,58 @@
+<div>
+    <form  nz-form>
+        <nz-form-item class="id-item">
+          <nz-form-label [nzSpan]="3" nzFor="id">Número</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <input nz-input name="id" type="text" id="id" [(ngModel)]="id">
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="3" nzFor="titulo">Título</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <input nz-input name="titulo" type="text" id="titulo" [(ngModel)]="titulo">
+          </nz-form-control>
+        </nz-form-item>
+
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="3" nzFor="descricao">Descrição</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <input nz-input name="descricao" type="text" id="descricao" [(ngModel)]="descricao">
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="5" nzFor="situacao">Situação</nz-form-label>
+          <nz-form-control [nzSpan]="10">
+            <nz-select  name="situacao" nzPlaceHolder="Selecione uma situação" [(ngModel)]="situacao">
+
+  
+                <nz-option nzValue="EM_ANDAMENTO"  nzLabel="Em andamento"></nz-option>
+                <nz-option nzValue="CONCLUIDA" nzLabel="Concluida"></nz-option>
+          
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+
+
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="5">Responsável</nz-form-label>
+          <nz-form-control [nzSpan]="10">
+            <nz-select name="responsavel"  nzPlaceHolder="Selecione um responsável" [(ngModel)]="responsavel">
+              <nz-option *ngFor="let usuario of usuarios" [nzValue]="usuario" [nzLabel]="usuario.nome"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <button nz-button nzType="primary" nzBlock="true" class="btn-editar" nzSize="large" (click)="atualizarTarefa(id, titulo, descricao, situacao, responsavel)">
+            <span nz-icon nzType="edit" nzTheme="outline" ></span>
+            Atualizar
+          </button>
+
+  
+
+      </form>
+  </div>

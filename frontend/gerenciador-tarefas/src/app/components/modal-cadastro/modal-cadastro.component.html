@@ -1,0 +1,68 @@
+<div>
+    <form  nz-form>
+  
+        <nz-form-item>
+          <nz-form-label [nzSpan]="3" nzFor="titulo">Título</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <input nz-input name="titulo" type="text" id="titulo" [(ngModel)]="titulo">
+          </nz-form-control>
+        </nz-form-item>
+
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="3" nzFor="descricao">Descrição</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <input nz-input name="descricao" type="text" id="descricao" [(ngModel)]="descricao">
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="5" nzFor="situacao">Situação</nz-form-label>
+          <nz-form-control [nzSpan]="10">
+            <nz-select  name="situacao" nzPlaceHolder="Selecione uma situação" [(ngModel)]="situacao">
+
+  
+                <nz-option nzValue="EM_ANDAMENTO"  nzLabel="Em andamento"></nz-option>
+                <nz-option nzValue="CONCLUIDA" nzLabel="Concluida"></nz-option>
+          
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="5" nzFor="prioridade">Prioridade</nz-form-label>
+            <nz-form-control [nzSpan]="10">
+              <nz-select  name="prioridade" nzPlaceHolder="Selecione uma prioridae" [(ngModel)]="prioridade">
+                  <nz-option nzValue="ALTA"  nzLabel="Alta"></nz-option>
+                  <nz-option nzValue="MEDIA" nzLabel="Média"></nz-option>
+                  <nz-option nzValue="BAIXA" nzLabel="Baixa"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="5">Responsável</nz-form-label>
+          <nz-form-control [nzSpan]="10">
+            <nz-select name="responsavel"  nzPlaceHolder="Selecione um responsável" [(ngModel)]="responsavel">
+              <nz-option *ngFor="let usuario of usuarios" [nzValue]="usuario" [nzLabel]="usuario.nome"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="5">Prazo</nz-form-label>
+            <nz-form-control [nzSpan]="10">
+              <nz-date-picker name="deadline" [(ngModel)]="deadline" [nzFormat]="'dd/MM/yyyy'" [nzPlaceHolder]="'Selecione uma deadline'"></nz-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+  
+
+        <button nz-button nzType="primary" nzBlock="true" class="btn-salvar"  (click)="cadastrarTarefa(titulo, descricao, prioridade, situacao, responsavel, deadline)">
+            <span nz-icon nzType="save" nzTheme="outline" ></span>
+            Salvar
+          </button>
+
+  
+
+      </form>
+  </div>

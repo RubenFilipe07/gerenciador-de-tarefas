@@ -21,6 +21,9 @@ import * as AllIcons from '@ant-design/icons-angular/icons';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { MenuComponent } from './components/menu/menu.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ModalComponent } from './components/modal-editar/modal.component';
+import { ModalCadastroComponent } from './components/modal-cadastro/modal-cadastro.component';
+
 
 registerLocaleData(ptBr);
 
@@ -38,7 +41,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     CadastroComponent,
     TarefasComponent,
     MenuComponent,
-    FooterComponent
+    FooterComponent,
+    ModalComponent,
+    ModalCadastroComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     HttpClientModule,
     BrowserAnimationsModule,
     NgZorroAntdModule,
-    NzIconModule
+    NzIconModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: pt_BR },
