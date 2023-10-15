@@ -1,1 +1,116 @@
-<p>tarefas works!</p>
+<nz-layout>
+
+
+  <menu-component></menu-component>
+
+  <nz-content>
+    <div class="conteudo">
+
+   
+      <h1 class="titulo-pesquisar">Pesquisar tarefa</h1>
+      <form class="form-pesquisa" nz-form>
+      
+        <nz-form-item>
+          <nz-form-label [nzSpan]="2" nzFor="id">Número</nz-form-label>
+          <nz-form-control [nzSpan]="10">
+            <input nz-input name="id" type="text" id="id" [(ngModel)]="id">
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="2" nzFor="titulo">Título</nz-form-label>
+          <nz-form-control [nzSpan]="18">
+            <input nz-input name="titulo" type="text" id="titulo" [(ngModel)]="titulo">
+          </nz-form-control>
+        </nz-form-item>
+
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="2" nzFor="descricao">Descrição</nz-form-label>
+          <nz-form-control [nzSpan]="23">
+            <input nz-input name="descricao" type="text" id="descricao" [(ngModel)]="descricao">
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="2" nzFor="situacao">Situação</nz-form-label>
+          <nz-form-control [nzSpan]="10">
+            <nz-select  name="situacao" nzPlaceHolder="Selecione uma situação" [(ngModel)]="situacao">
+
+  
+                <nz-option nzValue="EM_ANDAMENTO"  nzLabel="Em andamento"></nz-option>
+                <nz-option nzValue="CONCLUIDA" nzLabel="Concluida"></nz-option>
+          
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="2">Responsável</nz-form-label>
+          <nz-form-control [nzSpan]="10">
+            <nz-select name="responsavel"  nzPlaceHolder="Selecione um responsável" [(ngModel)]="responsavel">
+              <nz-option *ngFor="let usuario of usuarios" [nzValue]="usuario.id" [nzLabel]="usuario.nome"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <div class="button-pesquisa">
+          <button nz-button nzType="primary" (click)="getTarefasFiltro(id, titulo, descricao, situacao, responsavel)">
+            <span nz-icon nzType="search" nzTheme="outline" ></span>
+            Pesquisar
+          </button>
+        </div>
+
+      </form>
+
+    
+      <button nz-button class="btn-nova-tarefa" nzSize="large" nzType="primary" (click)="abrirModalCadastrar()" >
+        <span nz-icon nzType="plus" nzTheme="outline"></span>
+        Nova tarefa
+      </button>
+
+
+
+
+      <nz-table #basicTable [nzData]="tarefas">
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Responsável</th>
+            <th>Situação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data"
+            [ngClass]="{'concluida': data.situacao === 'CONCLUIDA', 'andamento': data.situacao === 'EM_ANDAMENTO'}">
+            <td>{{ data.id }}</td>
+            <td>{{ data.titulo }}</td>
+            <td>{{ data.descricao }}</td>
+            <td>{{ data.responsavel.nome }}</td>
+            <td>{{ data.situacao }}</td>
+            <td>
+              <button nz-button nzType="primary" nzGhost nzSize="small" (click)="abrirModalEditar(data.id, data.titulo, data.descricao, data.responsavel, data.situacao)">
+                <span nz-icon nzType="edit" nzTheme="outline"></span>
+                Editar</button>
+              <button nz-button nzType="primary" nzDanger nzSize="small" (click)="removerTarefa(data.id)">
+                <span nz-icon nzType="delete" nzTheme="outline"></span>
+                Excluir</button>
+              <button nz-button nzType="primary" nzSize="small" (click)="marcarComoConcluida(data.id)">
+                <span nz-icon nzType="check" nzTheme="outline"></span>
+                Concluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+
+
+
+    </div>
+  </nz-content>
+
+  <footer-component></footer-component>
+</nz-layout>
