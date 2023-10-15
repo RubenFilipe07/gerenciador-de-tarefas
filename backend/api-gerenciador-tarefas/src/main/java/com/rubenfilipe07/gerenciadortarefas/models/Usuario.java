@@ -8,6 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "TB_USUARIOS")
@@ -17,9 +22,21 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NonNull
 	private Long id;
+	
+	@NonNull
+	@NotBlank
 	private String nome;
+	
+	@NonNull
+    @NotBlank
+    @Size(min = 3, max = 20)
 	private String senha;
+	
+	@Email
+	@NonNull
+    @NotBlank
 	private String email;
 
 	@Override
