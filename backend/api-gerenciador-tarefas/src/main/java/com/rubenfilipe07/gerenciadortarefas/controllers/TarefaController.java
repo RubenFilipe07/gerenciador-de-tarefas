@@ -22,12 +22,14 @@ public class TarefaController {
 	@Autowired
 	private TarefaService tarefaService;
 
+	@Operation(summary = "Obtém uma tarefa por ID", method = "GET")
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getOneTarefa(@PathVariable long id) {
 		return tarefaService.getOneTarefa(id);
 	}
 
-	@Operation(summary = "Obtém uma tarefa por ID", method = "GET")
+
+	@Operation(summary = "Obtém as tarefas com um filtro de usuário", method = "GET")
 	@GetMapping
 	public ResponseEntity<Object> getAllTarefasByUsuario(@RequestParam(name = "usuario", required = false) Long id) {
 		return tarefaService.getAllTarefasByUsuario(id);
