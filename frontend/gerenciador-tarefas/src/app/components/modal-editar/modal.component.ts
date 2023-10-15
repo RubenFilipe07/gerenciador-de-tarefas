@@ -13,11 +13,11 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 export class ModalComponent implements OnInit {
 
-  id: string = "";
-  titulo: string = "";
-  descricao: string = "";
-  situacao: string = "";
-  responsavel: string = "";
+  id: string = this.tarefasService.getId();
+  titulo: string = this.tarefasService.getTitulo();
+  descricao: string = this.tarefasService.getDescricao();
+  situacao: string =  this.tarefasService.getSituacao();
+  responsavel: string = this.tarefasService.getResponsavel();
 
   usuarios: any[] = [];
 
@@ -27,7 +27,6 @@ export class ModalComponent implements OnInit {
   
 
   atualizarTarefa(id: string, titulo: string, descricao: string, situacao: string, responsavel: string) {
-    console.log(id, titulo, descricao, situacao, responsavel);
     this.tarefasService.atualizarTarefa(id, titulo, descricao, situacao, responsavel).subscribe(
       (res) => {
         this.mostrarMensagem('success', 'Sucesso', 'Tarefa atualizada com sucesso!');

@@ -3,7 +3,7 @@
         <nz-form-item class="id-item">
           <nz-form-label [nzSpan]="3" nzFor="id">Número</nz-form-label>
           <nz-form-control [nzSpan]="14">
-            <input nz-input name="id" type="text" id="id" [(ngModel)]="id">
+            <input nz-input name="id" type="text" id="id" [(ngModel)]="id" [disabled]="true">
           </nz-form-control>
         </nz-form-item>
 
@@ -26,17 +26,11 @@
           <nz-form-label [nzSpan]="5" nzFor="situacao">Situação</nz-form-label>
           <nz-form-control [nzSpan]="10">
             <nz-select  name="situacao" nzPlaceHolder="Selecione uma situação" [(ngModel)]="situacao">
-
-  
                 <nz-option nzValue="EM_ANDAMENTO"  nzLabel="Em andamento"></nz-option>
                 <nz-option nzValue="CONCLUIDA" nzLabel="Concluida"></nz-option>
-          
             </nz-select>
           </nz-form-control>
         </nz-form-item>
-
-
-
 
         <nz-form-item>
           <nz-form-label [nzSpan]="5">Responsável</nz-form-label>

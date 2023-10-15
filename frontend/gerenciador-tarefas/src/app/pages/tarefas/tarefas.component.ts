@@ -31,6 +31,12 @@ export class TarefasComponent implements OnInit {
   }
 
   abrirModalEditar(id: string, titulo: string, descricao: string, situacao: string, responsavel: string) {
+    this.tarefasService.setId(id);
+    this.tarefasService.setTitulo(titulo);
+    this.tarefasService.setDescricao(descricao);
+    this.tarefasService.setSituacao(situacao);
+    this.tarefasService.setResponsavel(responsavel);
+
     this.modalService.create({
       nzTitle:"Editar Tarefa",
       nzContent: ModalComponent,

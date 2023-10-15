@@ -11,6 +11,51 @@ export class TarefasService {
 
   constructor(private http: HttpClient) { }
 
+  private id: string = "";
+  private titulo: string = "";
+  private descricao: string = "";
+  private situacao: string = "";
+  private responsavel: string = "";
+
+  public setId(id: string): void {
+    this.id = id;
+  }
+
+  public getId(): string {
+    return this.id;
+  }
+
+  public setTitulo(titulo: string): void {
+    this.titulo = titulo;
+  }
+
+  public getTitulo(): string {
+    return this.titulo;
+  }
+
+  public setDescricao(descricao: string): void {
+    this.descricao = descricao;
+  }
+
+  public getDescricao(): string {
+    return this.descricao;
+  }
+
+  public setSituacao(situacao: string): void {
+    this.situacao = situacao;
+  }
+
+  public getSituacao(): string {
+    return this.situacao;
+  }
+
+  public setResponsavel(responsavel: string): void {
+    this.responsavel = responsavel;
+  }
+
+  public getResponsavel(): string {
+    return this.responsavel;
+  }
 
   public getTarefas(): Observable<any> {
     return this.http.get(this.apiUrl);
