@@ -98,4 +98,15 @@ public class TarefaService {
 			return ResponseEntity.status(HttpStatus.OK).body("{\"message\":\"Tarefa deletada com sucesso\"}");
 		}
 	}
+
+	public void setTarefaRepository(TarefaRepository tarefaRepository) {
+		this.tarefaRepository = tarefaRepository;
+	}
+
+	public void setTarefaUsuarioRepository(UsuarioRepository usuarioRepository) {
+	this.usuarioRepository = usuarioRepository;
+		
+	}
+	
+	
 }
