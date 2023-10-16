@@ -19,8 +19,12 @@ import com.rubenfilipe07.gerenciadortarefas.models.Usuario;
 import com.rubenfilipe07.gerenciadortarefas.repositories.UsuarioRepository;
 import com.rubenfilipe07.gerenciadortarefas.security.TokenService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("auth")
+@Tag(name = "auth")
 public class AuthenticationController {
 
     @Autowired
@@ -32,6 +36,7 @@ public class AuthenticationController {
     @Autowired
     private TokenService tokenService;
 
+    @Operation(summary = "Loga um usuário com email e senha", method = "POST")
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
@@ -42,6 +47,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
+    @Operation(summary = "Cadastra um novo usuário", method = "POST")
     @PostMapping("/cadastro")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
         if (this.usuarioRepository.findByEmail(data.getEmail()) != null) {
