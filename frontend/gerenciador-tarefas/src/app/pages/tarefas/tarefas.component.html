@@ -93,7 +93,7 @@
             <td>{{ data.responsavel.nome }}</td>
             <td>{{ data.situacao }}</td>
             <td>
-              <button nz-button nzType="primary" nzGhost nzSize="small" (click)="abrirModalEditar(data.id, data.titulo, data.descricao, data.responsavel, data.situacao)">
+              <button nz-button nzType="primary" nzGhost nzSize="small" (click)="abrirModalEditar(data.id, data.titulo, data.descricao, data.situacao, data.responsavel)">
                 <span nz-icon nzType="edit" nzTheme="outline"></span>
                 Editar</button>
               <button nz-button nzType="primary" nzDanger nzSize="small" (click)="removerTarefa(data.id)">
