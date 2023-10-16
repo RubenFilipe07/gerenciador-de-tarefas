@@ -91,8 +91,6 @@ http://localhost:8080/auth/cadastro </br>
   <a href="https://ng.ant.design/components/icon/en">
     <img src="https://img.shields.io/badge/ng%20zorro%20Icons-007DB8?style=for-the-badge&logo=antdesign&logoColor=white" />
   </a> <br/>
-
-
   
  <h3>Back-end</h3>
 
@@ -103,6 +101,19 @@ http://localhost:8080/auth/cadastro </br>
   <a href="https://spring.io/projects/spring-boot">
   <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white" />
   </a> <br/>
+
+  <a href="https://spring.io/projects/spring-security">
+  <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=for-the-badge&logo=spring&logoColor=white" />
+  </a>  <br/>
+
+  <a href="https://jwt.io/">
+  <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON Web Tokens&logoColor=white" />
+</a>  <br/>
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">
+  <img src="https://img.shields.io/badge/CORS-FF8800?style=for-the-badge&logo=corslogoColor=white" />
+</a>  <br/>
+
   
   <a href="https://www.java.com/">
   <img src="https://img.shields.io/badge/Java-e61e2c?style=for-the-badge&logo=openjdk&logoColor=white" />
