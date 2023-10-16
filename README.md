@@ -1,6 +1,15 @@
 # Gerenciador de tarefas | SIGTarefas
 
-Uma gerenciador de tarefas desenvolvido para o teste técnico da esig group. Feito com Angular e Spring, que tem como objetivo organizar as tarefas em de uma equipe. Foi utilizado um sistema de login feito com Spring security e tokens JWT.
+<p align="center">
+  <a href="https://sigtarefas.web.app/">
+    <img src="https://github.com/RubenFilipe07/detector-ofensas/assets/53026536/0f7d2f29-1daa-4131-aabe-564f828cebc4" />
+  </a>
+</p>
+
+
+
+Uma gerenciador de tarefas desenvolvido para o teste técnico da esig group. Feito com Angular e Spring, que tem como objetivo organizar as tarefas de uma equipe. Foi utilizado um sistema de login feito com Spring security e tokens JWT.
+
 
 ## Requisitos
 -   Node.js: Versão 16 ou superior
@@ -27,8 +36,8 @@ spring.datasource.password=123
 spring.jpa.hibernate.ddl-auto=update
 spring.mvc.pathmatch.matching-strategy=ant-path-matcher
 api.security.token.secret=${JWT_SECRET_SEC_TOKEN}</code>
-  <li>Crie uma variável de ambiente para JWT_SECRET_SEC_TOKEN</li>
   <li>Crie um banco com o nome criado na instrução anterior</li>
+  <li>Crie uma variável de ambiente para JWT_SECRET_SEC_TOKEN</li>
   <li>Inicie um servidor local do projeto com <code>/mvnw spring-boot:run</code></li>
     <li>Ou utilize sua IDE de preferência</code></li>
 
@@ -53,10 +62,52 @@ api.security.token.secret=${JWT_SECRET_SEC_TOKEN}</code>
 
 ## Endpoints
 
-http://localhost:8080/api/tarefas </br>
-http://localhost:8080/api/cadastro </br>
-http://localhost:8080/auth/login </br>
-http://localhost:8080/auth/cadastro </br>
+Alguns endpoints exigem autenticação por JWT, são eles: GET "/api/tarefas" e GET "/api/usuarios". POST "/api/tarefas" necessita de um 'role' (função/papel atribuido) de ADMIN ou USER. <br/>
+Para acessá-los, é preciso utilizar o header: <code>'Authorization': `${token}`}</code> <br/> 
+
+Key: <code>Authorization</code> <br/>
+Value: <code>${token gerado ao fazer login}</code> <br/> 
+Tal como na imagem abaixo: 
+
+![image](https://github.com/RubenFilipe07/gerenciador-de-tarefas/assets/53026536/8dc70a1a-b0d6-4571-99c2-be6bf2d28469)
+
+
+Visualize com: </br>
+<a href="https://www.postman.com">
+  <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white"/>
+</a> 
+</p>
+
+
+### Tarefas
+
+- **GET /api/tarefas**: Obtém a lista de tarefas.
+- **POST /api/tarefas**: Cria uma nova tarefa.
+- **GET /api/tarefas/{id}**: Obtém os detalhes de uma tarefa específica.
+- **DELETE /api/tarefas/{id}**: Exclui uma tarefa por ID.
+- **POST /api/tarefas/{id}/concluida**: Marca uma tarefa como concluída.
+
+#### Filtrar Tarefas
+
+- **GET /api/tarefas/filtro?**: Filtra as tarefas com base em parâmetros.
+  - Parâmetros de consulta:
+    - `id`: ID da tarefa (opcional).
+    - `titulo`: Título da tarefa (opcional).
+    - `descricao`: Descrição da tarefa (opcional).
+    - `situacao`: Situação da tarefa (opcional).
+    - `responsavel`: Responsável pela tarefa (opcional).
+
+### Cadastro
+
+- **GET /api/cadastro**: Obtém a lista de cadastros.
+- **POST /api/cadastro**: Cria um novo cadastro.
+- **GET /api/cadastro/{id}**: Obtém os detalhes de um cadastro específico.
+- **DELETE /api/cadastro/{id}**: Exclui um cadastro por ID.
+
+### Autenticação
+
+- **POST /auth/login**: Realiza o login do usuário e recebe o JWT Token.
+- **POST /auth/cadastro**: Cria um novo cadastro de usuário.
 
 ## Itens feitos 
 
@@ -68,6 +119,7 @@ http://localhost:8080/auth/cadastro </br>
 - **Testes unitários** com JUnit 5 e Mockito para classes de serviço
 - **Swagger UI** implementado
 - **Hospedagem:** Back-end rodando no Railway.app e front-end no Firebase
+-  **Diferenciais:** Senhas são criptografadas e os endpoints críticos exigem autenticação por JWT TOKEN que é gerado ao logar com um usuário
 
 
 <h3>Front-end</h3>
@@ -138,6 +190,14 @@ http://localhost:8080/auth/cadastro </br>
   <a href="https://railway.app/">
     <img src="https://img.shields.io/badge/Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white" />
   </a> <br/>
+
+## Demonstração 
+
+<img src="https://github.com/RubenFilipe07/gerenciador-de-tarefas/assets/53026536/58078ba9-369d-4994-93a1-47b3efda4056" width="850" />
+
+<img src="https://github.com/RubenFilipe07/gerenciador-de-tarefas/assets/53026536/1118b2b1-43d7-421e-adec-c4e3bd8516b2" width="850" />
+
+<img src="https://github.com/RubenFilipe07/gerenciador-de-tarefas/assets/53026536/05012aaf-1ef7-4eb4-ae99-69bb79f3621f" width="850" />
 
  ## Licensa
 
