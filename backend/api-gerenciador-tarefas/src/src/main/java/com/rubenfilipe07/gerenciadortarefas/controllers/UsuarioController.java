@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/usuarios", produces = {"application/json"})
 @Tag(name = "usuarios")
+@CrossOrigin(origins = "*")
 public class UsuarioController {
 
 	@Autowired

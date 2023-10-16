@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/api/tarefas", produces = {"application/json"})
 @Tag(name = "tarefas")
+@CrossOrigin(origins = "*")
 public class TarefaController {
 
 	@Autowired
