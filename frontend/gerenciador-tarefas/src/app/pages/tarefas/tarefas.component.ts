@@ -145,9 +145,7 @@ getUsuarios() {
     
     this.tarefasService.getTarefasFiltro(id, titulo, descricao, situacao, responsavel).subscribe(
       (result) => {
-      
         this.tarefas = result;
-        console.log(this.tarefas);
       },
       (error) => {
       

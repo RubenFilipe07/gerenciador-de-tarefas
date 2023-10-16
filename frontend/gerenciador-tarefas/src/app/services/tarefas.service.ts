@@ -143,7 +143,9 @@ export class TarefasService  {
       params = params.set('responsavel', responsavel);
     }
 
-    return this.http.get(this.apiUrlFiltro, { headers, responseType: 'json' });
+    console.log(this.apiUrlFiltro, { headers, responseType: 'json' })
+
+    return this.http.get(this.apiUrlFiltro+ params, { headers, responseType: 'json' });
 
 
   }
