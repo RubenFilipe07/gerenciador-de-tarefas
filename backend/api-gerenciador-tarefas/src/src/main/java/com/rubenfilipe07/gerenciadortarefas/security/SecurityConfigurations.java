@@ -27,12 +27,12 @@ public class SecurityConfigurations {
 				.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize 
-					  /* .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+					   .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
 						.antMatchers(HttpMethod.POST, "/auth/cadastro").permitAll()
 						.antMatchers(HttpMethod.POST, "/api/tarefas").hasRole("ADMIN")
 						.antMatchers(HttpMethod.POST, "/api/tarefas").hasRole("USER")
 						.antMatchers(HttpMethod.GET, "/api/tarefas").authenticated()
-						.antMatchers(HttpMethod.GET, "/api/usuarios").authenticated() */
+						.antMatchers(HttpMethod.GET, "/api/usuarios").authenticated() 
 						.anyRequest().permitAll()
 						
 				) 
