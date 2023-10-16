@@ -12,9 +12,9 @@ export class TarefasService  {
   
   constructor(private http: HttpClient, private authService: AuthService) { }
 
- 
+  
 
-  private apiUrl = 'http://localhost:8080/api/tarefas';
+  private apiUrl = 'http://gerenciador-de-tarefas-production.up.railway.app/api/tarefas';
 
 
   private id: string = "";
@@ -108,7 +108,7 @@ export class TarefasService  {
    
   }
 
-  private apiUrlFiltro = 'http://localhost:8080/api/tarefas/filtro?';
+  private apiUrlFiltro = 'http://gerenciador-de-tarefas-production.up.railway.app/tarefas/filtro?';
 
 
   public getTarefasFiltro(

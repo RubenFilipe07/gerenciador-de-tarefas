@@ -11,7 +11,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class UsuariosService {
 
-  private apiUrl = 'http://localhost:8080/api/usuarios';
+  private apiUrl = 'http://gerenciador-de-tarefas-production.up.railway.app/api/usuarios';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -24,7 +24,7 @@ export class UsuariosService {
     return this.http.get(this.apiUrl, { headers, responseType: 'json' });
   }
 
-  private apiUrlAuth = 'http://localhost:8080/auth/cadastro';
+  private apiUrlAuth = 'http://gerenciador-de-tarefas-production.up.railway.app/auth/cadastro';
 
   public cadastrarUsuario(usuario: Usuario): Observable<any> {
   
@@ -37,7 +37,7 @@ export class UsuariosService {
     return this.http.post(this.apiUrlAuth, data); 
   }
 
-  private apiUrlLogin = 'http://localhost:8080/auth/login';
+  private apiUrlLogin = 'http://gerenciador-de-tarefas-production.up.railway.app/auth/login';
 
   public loginUsuario(usuario: Login): Observable<any> {
     const data = {
