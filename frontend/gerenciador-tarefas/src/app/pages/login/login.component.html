@@ -4,6 +4,35 @@
     <nz-content>
         <div class="conteudo">
 
+            <form  nz-form class="form-login">
+                <h1>Login</h1>
+
+                <nz-form-item>
+                    <nz-form-label nzFor="titulo">Email</nz-form-label>
+                    <nz-form-control >
+                      <input nz-input name="email" type="text" id="email" [(ngModel)]="email">
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <nz-form-item>
+                    <nz-form-label nzFor="titulo">Senha</nz-form-label>
+                    <nz-form-control >
+                      <input nz-input name="senha" type="password" id="senha" [(ngModel)]="senha">
+                    </nz-form-control>
+                  </nz-form-item>
+
+     
+
+
+                <button nz-button nzType="primary" nzBlock="true" class="btn-salvar"  (click)="loginUsuario()" >
+                    <span nz-icon nzType="login" nzTheme="outline" ></span>
+                    Login
+                  </button>
+        
+          
+        
+              </form>
+
         </div>
     </nz-content>
 

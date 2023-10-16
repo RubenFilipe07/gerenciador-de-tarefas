@@ -30,10 +30,8 @@ export class ModalComponent implements OnInit {
     this.tarefasService.atualizarTarefa(id, titulo, descricao, situacao, responsavel).subscribe(
       (res) => {
         this.mostrarMensagem('success', 'Sucesso', 'Tarefa atualizada com sucesso!');
-        console.log(res);
       },
       (err) => {
-        console.log(err);
         this.mostrarMensagem('error', 'Erro', 'Erro ao atualizar tarefa!');
       }
     );

@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TarefasService {
+export class TarefasService  {
+
+  
+  constructor(private http: HttpClient, private authService: AuthService) { }
+
+ 
 
   private apiUrl = 'http://localhost:8080/api/tarefas';
 
-  constructor(private http: HttpClient) { }
 
   private id: string = "";
   private titulo: string = "";
@@ -58,18 +64,28 @@ export class TarefasService {
   }
 
   public getTarefas(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    const token = this.authService.getToken(); 
+    const headers = new HttpHeaders({
+      'Authorization': `${token}`
+    });
+
+    return this.http.get(this.apiUrl, { headers, responseType: 'json' });
   }
 
   public removerTarefa(id: number): Observable<any> {
-    return this.http.delete(this.apiUrl + '/' + id, { responseType: 'json' })
+    return this.http.delete(this.apiUrl + '/' + id, {responseType: 'json' })
   }
 
   public marcarComoConcluida(id: number): Observable<any> {
-    return this.http.put(this.apiUrl + '/' + id + '/concluida', { responseType: 'json' })
+    return this.http.put(this.apiUrl + '/' + id + '/concluida', {  responseType: 'json' })
   }
 
   public atualizarTarefa(id: string | null, titulo: string | null, descricao: string| null, situacao: string| null, responsavel: string | null): Observable<any> {
+
+    const token = this.authService.getToken(); 
+    const headers = new HttpHeaders({
+      'Authorization': `${token}`
+    });
 
     id = id === "" ? null : id;
     titulo = titulo === "" ? null : titulo;
@@ -77,12 +93,19 @@ export class TarefasService {
     situacao = situacao === "" ? null : situacao;
     responsavel = responsavel === "" ? null : responsavel;
 
-    console.log(this.apiUrl + '/' + id, { titulo, descricao, situacao, responsavel })
-    return this.http.put(this.apiUrl + '/' + id, { titulo, descricao, situacao, responsavel }, { responseType: 'json' })
+    return this.http.put(this.apiUrl + '/' + id, { titulo, descricao, situacao, responsavel },  { headers, responseType: 'json' });
   }
 
   public cadastrarTarefa(titulo: string, descricao: string, situacao: string, prioridade: string, responsavel: string, deadline: string): Observable<any> {
-    return this.http.post(this.apiUrl, { titulo, descricao, situacao, prioridade, responsavel, deadline }, { responseType: 'json' })
+
+    const token = this.authService.getToken(); 
+    const headers = new HttpHeaders({
+      'Authorization': `${token}`
+    });
+
+    console.log(this.apiUrl, { titulo, descricao, situacao, prioridade, responsavel, deadline })
+    return this.http.post(this.apiUrl, { titulo, descricao, situacao, prioridade, responsavel, deadline }, { headers, responseType: 'json' });
+   
   }
 
   private apiUrlFiltro = 'http://localhost:8080/api/tarefas/filtro?';
@@ -95,6 +118,13 @@ export class TarefasService {
     situacao: string,
     responsavel: string
   ): Observable<any> {
+
+
+    const token = this.authService.getToken(); 
+    const headers = new HttpHeaders({
+      'Authorization': `${token}`
+    });
+
 
     let params = new HttpParams();
     if (id !== "") {
@@ -113,8 +143,7 @@ export class TarefasService {
       params = params.set('responsavel', responsavel);
     }
 
-    console.log(this.apiUrlFiltro + params);
-    return this.http.get(this.apiUrlFiltro, { params });
+    return this.http.get(this.apiUrlFiltro, { headers, responseType: 'json' });
 
 
   }
