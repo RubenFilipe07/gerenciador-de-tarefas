@@ -22,24 +22,23 @@ public class SecurityConfigurations {
 	SecurityFilter securityFilter;
 	
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		return httpSecurity
-				.cors().and()
-				.csrf(csrf -> csrf.disable())
-				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(authorize -> authorize 
-					   .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
-						.antMatchers(HttpMethod.POST, "/auth/cadastro").permitAll()
-						.antMatchers(HttpMethod.POST, "/api/tarefas").hasRole("ADMIN")
-						.antMatchers(HttpMethod.POST, "/api/tarefas").hasRole("USER")
-						.antMatchers(HttpMethod.GET, "/api/tarefas").authenticated()
-						.antMatchers(HttpMethod.GET, "/api/usuarios").authenticated() 
-						.anyRequest().permitAll()
-						
-				) 
-				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-				.build();
-	}
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
+            .cors().and()
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(authorize -> authorize
+                .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/cadastro").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/tarefas").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/tarefas").hasRole("USER")
+                .antMatchers(HttpMethod.GET, "/api/tarefas").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/usuarios").authenticated()
+                .anyRequest().permitAll()
+            )
+            .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+            .build();
+    }
 
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
