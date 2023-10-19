@@ -1,4 +1,4 @@
-# Gerenciador de tarefas | SIGTarefas
+# Gerenciador de Tarefas | SIGTarefas
 
 <p align="center">
   <a href="https://sigtarefas.web.app/">
@@ -6,23 +6,29 @@
   </a>
 </p>
 
-
-
-Uma gerenciador de tarefas desenvolvido para o teste técnico da esig group. Feito com Angular e Spring, que tem como objetivo organizar as tarefas de uma equipe. Foi utilizado um sistema de login feito com Spring security e tokens JWT.
-
+<p>
+Uma gerenciador de tarefas desenvolvido para o teste técnico da ESIG Group. O sistema tem como objetivo gerenciar as tarefas de uma equipe, com a capacidade de as delegar a diferentes usuários cadastrados e fornecer as ferramentas necessárias para mantê-las, como as funcionalidades de criação, remoção, conclusão, edição e pesquisa de uma determinada tarefa.
+Implementado com Angular e Spring, o sistema trata-se de um site uma API REST, em que foi utilizado um sistema de login feito com spring security e tokens JWT, além de bloquear requisições não autenticadas, para aprimorar a segurança e privacidade dos dados, bem como foi utilizado rotas privadas na aplicação que dependem de autenticação para serem exibidas.
+</p>
 
 ## Requisitos
--   Node.js: Versão 16 ou superior
+-   Node.js: Versão 16 ou superior (Requerida pelo angular 16)
 -   Java: Versão 11
 -   Angular: Versão 16.2.0
 -   PostgreSQL: Um banco de dados PostgreSQL
 
 ## Orientações de execução
 
+<ol>
+  <li>Clone o repositório com o comando: <code>git clone https://github.com/RubenFilipe07/gerenciador-de-tarefas.git</code> </li>
+</ol>
+
+
 <h5>Para rodar o projeto Angular</h5>
 <ol>
   <li>Certifique-se de ter o node.js instalado na sua máquina, caso não tenha, baixe aqui: <a href="https://nodejs.org/en/">nodejs.org</a></li>
-  <li>Dentro do projeto digite <code>npm i</code> no terminal para baixar as dependências</li>
+  <li>Caso o Angular CLI não estiver instalado, você pode instalá-lo usando o seguinte comando:</li> <code>npm install -g @angular/cli</code>
+  <li>Dentro do projeto digite <code>npm i</code> no terminal para baixar as dependências do projeto</li>
   <li>Digite <code>ng serve</code> para iniciar o servidor e o acesse pelo link: <code>http://localhost:4200/</code></li>
 </ol>
 
@@ -56,14 +62,15 @@ api.security.token.secret=${JWT_SECRET_SEC_TOKEN}</code>
 
 <h3>Links (Localhost)</h3>
 <ul>
-    <li><a href="http://localhost:4200/">Aplicação -> http://localhost:4200/</a></li>
     <li><a href="http://localhost:8080/swagger-ui/index.html">Docs -> http://localhost:8080/swagger-ui/index.html</a></li>
+    <li><a href="http://localhost:4200/">Aplicação -> http://localhost:4200/</a></li>
+    <li><a href="http://localhost:8088">API -> http://localhost:8080</a></li>
 </ul>
 
 ## Endpoints
 
 Alguns endpoints exigem autenticação por JWT, são eles: GET "/api/tarefas" e GET "/api/usuarios". POST "/api/tarefas" necessita de um 'role' (função/papel atribuido) de ADMIN ou USER. <br/>
-Para acessá-los, é preciso utilizar o header: <code>'Authorization': `${token}`}</code> <br/> 
+Para acessá-los, é preciso utilizar na requisição o header: <code>'Authorization': `${token}`}</code> <br/> 
 
 Key: <code>Authorization</code> <br/>
 Value: <code>${token gerado ao fazer login}</code> <br/> 
@@ -82,10 +89,11 @@ Visualize com: </br>
 ### Tarefas
 
 - **GET /api/tarefas**: Obtém a lista de tarefas.
-- **POST /api/tarefas**: Cria uma nova tarefa.
 - **GET /api/tarefas/{id}**: Obtém os detalhes de uma tarefa específica.
+- **POST /api/tarefas**: Cria uma nova tarefa.
 - **DELETE /api/tarefas/{id}**: Exclui uma tarefa por ID.
-- **POST /api/tarefas/{id}/concluida**: Marca uma tarefa como concluída.
+- **PUT /api/tarefas/{id}**: Atualiza uma tarefa existente por ID.
+- **PUT /api/tarefas/{id}/concluida**: Marca uma tarefa como concluída.
 
 #### Filtrar Tarefas
 
@@ -97,12 +105,13 @@ Visualize com: </br>
     - `situacao`: Situação da tarefa (opcional).
     - `responsavel`: Responsável pela tarefa (opcional).
 
-### Cadastro
+### Usuários
 
-- **GET /api/cadastro**: Obtém a lista de cadastros.
-- **POST /api/cadastro**: Cria um novo cadastro.
-- **GET /api/cadastro/{id}**: Obtém os detalhes de um cadastro específico.
-- **DELETE /api/cadastro/{id}**: Exclui um cadastro por ID.
+- **GET /api/cadastro**: Obtém a lista de usuários.
+- **POST /api/cadastro**: Cria um novo usuário.
+- **GET /api/cadastro/{id}**: Obtém os detalhes de um usuário específico.
+- **PUT /api/cadastro/{id}**: Atualiza um usuário por ID.
+- **DELETE /api/cadastro/{id}**: Exclui um usuário por ID.
 
 ### Autenticação
 
@@ -111,19 +120,22 @@ Visualize com: </br>
 
 ## Itens feitos 
 
-- **Front-end com Angular** (v16.20.0)
+- **Front-end com Angular** (v16.2.0)
 - **Back-end Java 11 e Spring Boot** (Java 11, Spring 2.7.1)
 - **Endpoints REST** implementados
 - **Autenticação JWT** implementada
 - **Banco de dados PostgreSQL e JPA** utilizados
 - **Testes unitários** com JUnit 5 e Mockito para classes de serviço
 - **Swagger UI** implementado
-- **Hospedagem:** Back-end rodando no Railway.app e front-end no Firebase
--  **Diferenciais:** Senhas são criptografadas e os endpoints críticos exigem autenticação por JWT TOKEN que é gerado ao logar com um usuário
-
+- **Hospedagem** Back-end e banco de dados rodando no Railway.app e front-end no Firebase
+-  **Diferenciais:**
+     <ol>
+        <li>As senhas são devidamente criptografadas, garantindo a segurança das informações dos usuários</li>
+        <li>Os endpoints críticos exigem autenticação por meio de JWT TOKEN, que é gerado quando um usuário faz login</li>
+        <li>Para a estilização do front-end, foi utilizado o framework ng-zorro</li>
+      </ol>
 
 <h3>Front-end</h3>
-
 
  <a href="https://angular.io/">
     <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" />
