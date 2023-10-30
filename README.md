@@ -1,9 +1,7 @@
 # Gerenciador de Tarefas | SIGTarefas
 
 <p align="center">
-  <a href="https://sigtarefas.web.app/">
     <img src="https://github.com/RubenFilipe07/detector-ofensas/assets/53026536/0f7d2f29-1daa-4131-aabe-564f828cebc4" />
-  </a>
 </p>
 
 <p>
@@ -52,13 +50,6 @@ api.security.token.secret=${JWT_SECRET_SEC_TOKEN}</code>
 
 
 ## Links
-
-<h3>Links (Servidor)</h3>
-<ul>
-    <li><a  href="https://gerenciador-de-tarefas-production.up.railway.app/swagger-ui/index.html">Docs -> https://gerenciador-de-tarefas-production.up.railway.app/swagger-ui/index.html</a></li>
-    <li><a  href="https://sigtarefas.web.app/">  Aplicação  -> https://sigtarefas.web.app/</a></li>
-    <li><a  href="https://gerenciador-de-tarefas-production.up.railway.app/">API -> https://gerenciador-de-tarefas-production.up.railway.app/</a></li>  
-</ul>
 
 <h3>Links (Localhost)</h3>
 <ul>
